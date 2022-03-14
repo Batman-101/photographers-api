@@ -21,19 +21,18 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * LocationsController with all API endpoints to query locations
- * Created by vn509pb on 3/5/2019.
+ * PhotographController with all API endpoints to query Photographers
  */
 @RestController
 public class PhotographController {
     private static final Logger log = LoggerFactory.getLogger(PhotographController.class);
 
     @Autowired
-    private final PhotographerService locationService;
+    private final PhotographerService photographerService;
 
     @Autowired
     public PhotographController(PhotographerService locationService) {
-        this.locationService = locationService;
+        this.photographerService = locationService;
     }
 
     @GetMapping("/photographers")
@@ -49,7 +48,7 @@ public class PhotographController {
         genericResponse.setSuccess(false);
 
         try {
-            List<Photographer> photographers = locationService.getAllPhotographers();
+            List<Photographer> photographers = photographerService.getAllPhotographers();
             if (photographers != null && !photographers.isEmpty()) {
                 genericResponse.setSuccess(true);
                 genericResponse.setData(photographers);
@@ -81,7 +80,7 @@ public class PhotographController {
         genericResponse.setSuccess(false);
 
         try {
-            Optional<Photographer> photographer = locationService.getPhotographerById(id);
+            Optional<Photographer> photographer = photographerService.getPhotographerById(id);
             if (photographer.isPresent()) {
                 genericResponse.setSuccess(true);
                 genericResponse.setData(photographer.get());
@@ -113,7 +112,7 @@ public class PhotographController {
         genericResponse.setSuccess(false);
 
         try {
-            List<Photographer> photographers = locationService.getPhotographerByType(eventType);
+            List<Photographer> photographers = photographerService.getPhotographerByType(eventType);
             if (photographers != null && !photographers.isEmpty()) {
                 genericResponse.setSuccess(true);
                 genericResponse.setData(photographers);

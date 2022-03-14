@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 public class PhotographersDaoImpl implements PhotographerDao {
     private static final Logger log = LoggerFactory.getLogger(PhotographersDaoImpl.class);
 
-    static String jsonFile = "/resources/photographers.json";
+    static String jsonFile = "src/main/resources/photographers.json";
     static List<Photographer> photographerList;
 
     static {
@@ -67,7 +67,7 @@ public class PhotographersDaoImpl implements PhotographerDao {
                     .collect(Collectors.toList());
 
         } catch (Exception ex) {
-            log.error("Exception occured while fetching photographer data : {}", ex.getMessage());
+            log.error("Exception occurred while fetching photographer data : {}", ex.getMessage());
             throw new DataAccessException("Failed the fetch data!!");
         }
     }
