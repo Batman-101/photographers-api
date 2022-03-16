@@ -4,6 +4,7 @@ import com.excel.studio.exception.DataAccessException;
 import com.excel.studio.model.Photographer;
 import com.excel.studio.model.Photographers;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
  * PhotographersDaoImpl contains all data access logic.
  */
 @Repository
+@Data
 public class PhotographersDaoImpl implements PhotographerDao {
     private static final Logger log = LoggerFactory.getLogger(PhotographersDaoImpl.class);
 
@@ -72,7 +74,7 @@ public class PhotographersDaoImpl implements PhotographerDao {
         }
     }
 
-    private static Photographers getPhotographersAtOnce() throws DataAccessException {
+    public static Photographers getPhotographersAtOnce() throws DataAccessException {
         try {
             ObjectMapper mapper = new ObjectMapper();
             // Convert JSON File to Java Object

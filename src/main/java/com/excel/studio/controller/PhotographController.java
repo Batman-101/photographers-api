@@ -35,7 +35,7 @@ public class PhotographController {
         this.photographerService = locationService;
     }
 
-    @GetMapping("/photographers")
+    @GetMapping("/api/photographers")
     @ApiPageable
     @ApiResponses(value = { @ApiResponse(code = 204, message = "No Content Found"),
             @ApiResponse(code = 400, message = "Invalid Params"),
@@ -64,10 +64,17 @@ public class PhotographController {
             errorModel.setMessage(ex.getMessage());
             genericResponse.setError(errorModel);
             return new ResponseEntity<>(genericResponse, HttpStatus.OK);
+        } catch(Exception ex){
+            genericResponse.setSuccess(false);
+            ErrorModel errorModel = new ErrorModel();
+            errorModel.setErrorCode(102);
+            errorModel.setMessage(ex.getMessage());
+            genericResponse.setError(errorModel);
+            return new ResponseEntity<>(genericResponse, HttpStatus.OK);
         }
     }
 
-    @GetMapping("/photographer/{photographerId}")
+    @GetMapping("/api/photographer/id/{photographerId}")
     @ApiPageable
     @ApiResponses(value = { @ApiResponse(code = 204, message = "No Content Found"),
             @ApiResponse(code = 400, message = "Invalid Params"),
@@ -96,10 +103,17 @@ public class PhotographController {
             errorModel.setMessage(ex.getMessage());
             genericResponse.setError(errorModel);
             return new ResponseEntity<>(genericResponse, HttpStatus.OK);
+        } catch(Exception ex){
+            genericResponse.setSuccess(false);
+            ErrorModel errorModel = new ErrorModel();
+            errorModel.setErrorCode(102);
+            errorModel.setMessage(ex.getMessage());
+            genericResponse.setError(errorModel);
+            return new ResponseEntity<>(genericResponse, HttpStatus.OK);
         }
     }
 
-    @GetMapping("/photographers/event/{eventType}")
+    @GetMapping("/api/photographers/event/{eventType}")
     @ApiPageable
     @ApiResponses(value = { @ApiResponse(code = 204, message = "No Content Found"),
             @ApiResponse(code = 400, message = "Invalid Params"),
@@ -122,6 +136,13 @@ public class PhotographController {
                 return new ResponseEntity<>(genericResponse, HttpStatus.NO_CONTENT);
             }
         } catch(DataAccessException ex){
+            genericResponse.setSuccess(false);
+            ErrorModel errorModel = new ErrorModel();
+            errorModel.setErrorCode(102);
+            errorModel.setMessage(ex.getMessage());
+            genericResponse.setError(errorModel);
+            return new ResponseEntity<>(genericResponse, HttpStatus.OK);
+        } catch(Exception ex){
             genericResponse.setSuccess(false);
             ErrorModel errorModel = new ErrorModel();
             errorModel.setErrorCode(102);

@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
-import java.util.*;
+import java.util.List;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -46,8 +46,8 @@ public class PhotographerControllerTests {
     public void testGetPhotographerById() throws Exception {
         Photographer p1 = new Photographer();
         p1.setId("1");
-        when(photographerService.getPhotographerById("1")).thenReturn(Optional.of(p1));
-        this.mockMvc.perform(get("/photographer/1").contentType(MediaType.APPLICATION_JSON)).andDo(print())
+        when(photographerService.getPhotographerById("1")).thenReturn(null);
+        this.mockMvc.perform(get("/photographer/id/1").contentType(MediaType.APPLICATION_JSON)).andDo(print())
                 .andExpect(status().isOk()) ;
     }
 
