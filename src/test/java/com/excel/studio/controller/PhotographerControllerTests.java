@@ -38,7 +38,7 @@ public class PhotographerControllerTests {
         p1.setId("1");
         photographers.add(p1);
         when(photographerService.getAllPhotographers()).thenReturn(photographers);
-        this.mockMvc.perform(get("/photographers").contentType(MediaType.APPLICATION_JSON)).andDo(print())
+        this.mockMvc.perform(get("/api/photographers").contentType(MediaType.APPLICATION_JSON)).andDo(print())
                 .andExpect(status().isOk()) ;
     }
 
@@ -47,7 +47,7 @@ public class PhotographerControllerTests {
         Photographer p1 = new Photographer();
         p1.setId("1");
         when(photographerService.getPhotographerById("1")).thenReturn(null);
-        this.mockMvc.perform(get("/photographer/id/1").contentType(MediaType.APPLICATION_JSON)).andDo(print())
+        this.mockMvc.perform(get("/api/photographer/id/1").contentType(MediaType.APPLICATION_JSON)).andDo(print())
                 .andExpect(status().isOk()) ;
     }
 
@@ -58,7 +58,7 @@ public class PhotographerControllerTests {
         p1.setId("1");
         photographers.add(p1);
         when(photographerService.getPhotographerByType("wedding")).thenReturn(photographers);
-        this.mockMvc.perform(get("/photographers/event/wedding").contentType(MediaType.APPLICATION_JSON)).andDo(print())
+        this.mockMvc.perform(get("/api/photographers/event/wedding").contentType(MediaType.APPLICATION_JSON)).andDo(print())
                 .andExpect(status().isOk()) ;
     }
 }

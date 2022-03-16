@@ -1,5 +1,6 @@
 package com.excel.studio.dao;
 
+import com.excel.studio.config.YmlConfig;
 import com.excel.studio.exception.DataAccessException;
 import com.excel.studio.model.Photographer;
 import com.excel.studio.model.Photographers;
@@ -7,13 +8,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -25,21 +25,13 @@ import java.util.stream.Collectors;
 public class PhotographersDaoImpl implements PhotographerDao {
     private static final Logger log = LoggerFactory.getLogger(PhotographersDaoImpl.class);
 
-    static String jsonFile = "src/main/resources/photographers.json";
-    static List<Photographer> photographerList;
-
-    static {
-        try {
-            photographerList = new ArrayList<>(Objects.requireNonNull(getPhotographersAtOnce()).getPhotographers());
-        } catch (DataAccessException e) {
-            e.printStackTrace();
-        }
-    }
+    @Autowired
+    private YmlConfig config;
 
     @Override
     public List<Photographer> getAllPhotographers() throws DataAccessException {
         try {
-               return photographerList;
+               return getPhotographersAtOnce().getPhotographers();
         } catch (Exception ex) {
             log.error("Exception occured while fetching photographer data : {}", ex.getMessage());
             throw new DataAccessException("Failed the fetch data!!");
@@ -49,7 +41,7 @@ public class PhotographersDaoImpl implements PhotographerDao {
     @Override
     public Optional<Photographer> getPhotographerById(String id) throws DataAccessException {
         try {
-                return photographerList
+                return getPhotographersAtOnce().getPhotographers()
                         .stream()
                         .filter(p -> p.getId().equalsIgnoreCase(id))
                         .findFirst();
@@ -63,7 +55,7 @@ public class PhotographersDaoImpl implements PhotographerDao {
     @Override
     public List<Photographer> getPhotographerByType(String type) throws DataAccessException {
         try {
-            return photographerList
+            return getPhotographersAtOnce().getPhotographers()
                     .stream()
                     .filter(p -> p.getEventType().contains(type))
                     .collect(Collectors.toList());
@@ -74,11 +66,11 @@ public class PhotographersDaoImpl implements PhotographerDao {
         }
     }
 
-    public static Photographers getPhotographersAtOnce() throws DataAccessException {
+    public Photographers getPhotographersAtOnce() throws DataAccessException {
         try {
             ObjectMapper mapper = new ObjectMapper();
             // Convert JSON File to Java Object
-            return mapper.readValue(new File(jsonFile), Photographers.class);
+            return mapper.readValue(new File(config.getDataPath()), Photographers.class);
         } catch (IOException e) {
             e.printStackTrace();
             throw new DataAccessException("Failed the fetch data!!");

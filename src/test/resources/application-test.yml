@@ -6,3 +6,5 @@ logging:
 spring:
   application:
     name: locationservices
+
+dataPath : "src/test/resources/photographers.json"

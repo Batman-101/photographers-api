@@ -1,0 +1,50 @@
+{
+  "photographers":[
+  {
+    "id" : "1",
+    "name":"Shyam",
+    "contact":{
+      "email": "shyamjaiswal@gmail.com",
+      "mobile" : "9238482910"
+    },
+    "eventType" : ["wedding", "birthdays"],
+    "avatar" : "",
+    "address" : ""
+  },
+  {
+    "id" : "2",
+    "name":"Bob",
+    "contact":{
+      "email": "Bob@gmail.com",
+      "mobile" : "9238482911"
+    },
+    "eventType" : ["wedding", "birthdays"],
+    "avatar" : "",
+    "address" : ""
+
+  },
+  {
+    "id" : "3",
+    "name":"Jai",
+    "contact":{
+      "email": "Jai@gmail.com",
+      "mobile" : "9238482912"
+    },
+    "eventType" : ["wedding", "wildlife"],
+    "avatar" : "",
+    "address" : ""
+
+  },
+    {
+      "id" : "4",
+      "name":"Ahmed",
+      "contact":{
+        "email": "Ahmed@gmail.com",
+        "mobile" : "9238482913"
+      },
+      "eventType" : ["wildlife", "sports"],
+      "avatar" : "",
+      "address" : ""
+
+    }
+]}

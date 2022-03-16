@@ -1,6 +1,8 @@
 server:
   port : 8081
 
+dataPath : "src/main/resources/photographers.json"
+
 spring:
   mvc:
     pathmatch:
